@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { RefreshCw, AlertTriangle, Loader2 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export const Input = React.memo(forwardRef(({ label, error, className, ...props }, ref) => (
@@ -62,3 +63,42 @@ export const Button = React.memo(({ children, variant = 'primary', size = 'md', 
     </button>
   );
 });
+
+export const AlertModal = React.memo(({ isOpen, onClose, onConfirm, title, message, confirmText = "Confirm", cancelText = "Cancel" }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div 
+        className="bg-white rounded-2xl shadow-2xl border border-slate-100 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-6">
+          <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-600 mb-4 px-2">
+            <AlertTriangle size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
+          <p className="text-slate-600 leading-relaxed mb-6">{message}</p>
+          
+          <div className="flex gap-3">
+            <Button variant="outline" className="flex-1" onClick={onClose}>
+              {cancelText}
+            </Button>
+            <Button variant="danger" className="flex-1 bg-red-600 text-white hover:bg-red-700" onClick={() => {
+              onConfirm();
+              onClose();
+            }}>
+              {confirmText}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+export const Spinner = React.memo(({ className, size = 24 }) => (
+  <div className={cn("flex items-center justify-center p-4", className)}>
+    <Loader2 size={size} className="text-blue-600 animate-spin" />
+  </div>
+));

@@ -87,9 +87,9 @@ export const initialData = {
     email: 'kottpkamal@gmail.com',
     phone: '+20 128 884 5234',
     location: 'Cairo, Egypt',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    portfolio: 'https://portfolio.com',
+    linkedin: 'https://www.linkedin.com/in/mahmoud-hussein-0bb055242',
+    github: 'https://github.com/mahmoudhussein6',
+    portfolio: 'https://my-portifolio-ylf4.vercel.app/',
   },
   summary: 'Frontend Developer with hands-on experience building scalable, responsive web and mobile applications using React, Angular, and modern JavaScript frameworks. Skilled in API integration, state management, and cross-platform development with React Native. Strong UI/UX background with experience in agile team environments. Passionate about delivering high-performance, user-centric digital solutions.',
   education: [

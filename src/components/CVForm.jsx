@@ -112,18 +112,18 @@ const CVForm = ({ data, onChange }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-      <div className="flex border-b border-gray-100 bg-gray-50/50 overflow-x-auto no-scrollbar scroll-smooth touch-pan-x">
-        <div className="flex min-w-max">
+    <div className="flex flex-col h-full bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+      <div className="flex border-b border-slate-100 bg-white overflow-x-auto no-scrollbar scroll-smooth touch-pan-x">
+        <div className="flex w-full">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "px-5 py-3.5 text-xs font-semibold whitespace-nowrap border-b-2 transition-all duration-200",
+              "flex-1 px-4 py-4 text-[10px] uppercase tracking-[0.15em] font-black whitespace-nowrap border-b-2 transition-all duration-200",
               activeTab === tab.id 
-                ? "border-blue-600 text-blue-600 bg-white" 
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100/50"
+                ? "border-blue-600 text-blue-600 bg-white shadow-[0_4px_12px_-4px_rgba(37,99,235,0.1)]" 
+                : "border-transparent text-slate-400 hover:text-slate-600 hover:bg-slate-50"
             )}
           >
             {tab.label}
@@ -132,7 +132,8 @@ const CVForm = ({ data, onChange }) => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-8 scroll-smooth">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-10 scroll-smooth bg-slate-50/50">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10 min-h-full">
         
         {activeTab === 'layout' && (
           <div className="space-y-10 animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -537,7 +538,7 @@ const CVForm = ({ data, onChange }) => {
             </div>
           </div>
         )}
-
+        </div>
       </div>
 
       <div className="p-4 border-t border-gray-100 flex justify-between bg-white items-center">
