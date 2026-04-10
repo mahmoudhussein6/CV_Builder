@@ -14,6 +14,7 @@ const CVForm = ({ data, onChange }) => {
     control,
     setValue,
     reset,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(cvSchema),
@@ -21,23 +22,31 @@ const CVForm = ({ data, onChange }) => {
     mode: 'onChange',
   });
 
+  const watchedData = useWatch({ control });
+
   // Sync with external data changes (like Reset) manually to avoid loops
   React.useEffect(() => {
-    reset(data);
-  }, [data, reset]);
-
-  const watchedData = useWatch({ control });
+    if (data) {
+      const currentFormValues = getValues();
+      const dataJSON = JSON.stringify(data);
+      const formJSON = JSON.stringify(currentFormValues);
+      
+      if (dataJSON !== formJSON) {
+        reset(data, { keepDefaultValues: true });
+      }
+    }
+  }, [data, reset, getValues]);
 
   // Sync internal form changes back to parent with a stability check
   React.useEffect(() => {
     if (watchedData && Object.keys(watchedData).length > 0) {
-      const currentJSON = JSON.stringify(data);
-      const nextJSON = JSON.stringify(watchedData);
+      const parentJSON = JSON.stringify(data);
+      const formJSON = JSON.stringify(watchedData);
       
-      if (currentJSON !== nextJSON) {
+      if (parentJSON !== formJSON) {
         const timeout = setTimeout(() => {
           onChange(watchedData);
-        }, 50); // Small buffer to ensure state is settled
+        }, 100); // Responsive debounce
         return () => clearTimeout(timeout);
       }
     }

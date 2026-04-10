@@ -217,12 +217,13 @@ export const initialData = {
       { category: 'Other Tools', items: 'Git/Github, JWT Auth, TailwindCSS, Bootstrap, Stripe Integration' },
       { category: 'UI UX Tools', items: 'Figma, Adobe XD' },
     ],
-    soft_skills: [
+    soft: [
       'Effective collaboration and communication with cross-functional teams.',
       'Proven ability to resolve complex challenges efficiently.',
       'High emotional intelligence for team dynamics',
       'Strong leadership skills, with experience mentoring teams to achieve project goals.',
     ],
+    soft_text: 'Effective collaboration and communication with cross-functional teams., Proven ability to resolve complex challenges efficiently., High emotional intelligence for team dynamics, Strong leadership skills, with experience mentoring teams to achieve project goals.',
     languages: [
       { name: 'Arabic', level: 'Native' },
       { name: 'English', level: 'Conversational' },

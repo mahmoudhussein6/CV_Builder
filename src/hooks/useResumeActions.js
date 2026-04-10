@@ -5,7 +5,7 @@ import { initialData } from '../lib/schema';
 export const useResumeActions = (cvData, setCvData, componentRef, setShowResetModal) => {
   const handlePrint = useReactToPrint({
     contentRef: componentRef,
-    documentTitle: `${cvData.personalInfo.fullName.replace(/\s+/g, '_') || 'Resume'}_CV`,
+    documentTitle: `${cvData?.personalInfo?.fullName?.replace(/\s+/g, '_') || 'Resume'}_CV`,
   });
 
   const handleDownload = useCallback(async () => {
@@ -15,7 +15,7 @@ export const useResumeActions = (cvData, setCvData, componentRef, setShowResetMo
     const html2pdf = (await import('html2pdf.js')).default;
     const opt = {
       margin: [10, 0, 10, 0],
-      filename: `${cvData.personalInfo.fullName.replace(/\s+/g, '_') || 'Resume'}_CV.pdf`,
+      filename: `${cvData?.personalInfo?.fullName?.replace(/\s+/g, '_') || 'Resume'}_CV.pdf`,
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {

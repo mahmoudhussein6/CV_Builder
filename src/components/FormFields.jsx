@@ -14,7 +14,7 @@ export const Input = React.memo(forwardRef(({ label, error, className, ...props 
       )}
       {...props}
     />
-    {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+    {error && <p className="text-xs text-red-500 px-1">{typeof error === 'string' ? error : error.message}</p>}
   </div>
 )));
 
@@ -30,7 +30,7 @@ export const TextArea = React.memo(forwardRef(({ label, error, className, ...pro
       )}
       {...props}
     />
-    {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+    {error && <p className="text-xs text-red-500 px-1">{typeof error === 'string' ? error : error.message}</p>}
   </div>
 )));
 

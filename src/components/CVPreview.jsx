@@ -2,8 +2,18 @@ import React from 'react';
 import { Mail, Phone, MapPin, Link as LinkedIn, Video, Play, ExternalLink, Award, GraduationCap, Briefcase, Code, User, Languages, Globe, GitBranch as Github } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-const CVPreview = React.forwardRef(({ data }, ref) => {
-  const { personalInfo, summary, education, internships, experience, projects, skills, certifications, settings } = data;
+const CVPreview = React.forwardRef(({ data = {} }, ref) => {
+  const { 
+    personalInfo = {}, 
+    summary = '', 
+    education = [], 
+    internships = [], 
+    experience = [], 
+    projects = [], 
+    skills = { technical: [], soft: [], languages: [] }, 
+    certifications = [], 
+    settings = {} 
+  } = data;
   
   const accentColor = settings?.accentColor || '#2563eb';
   const template = settings?.template || 'classic';
@@ -190,6 +200,7 @@ const CVPreview = React.forwardRef(({ data }, ref) => {
         );
 
       case 'skills':
+        if (!skills) return null;
         return (
           <section key="skills" className={isProfessional ? "mb-4" : "mb-5"}>
             <h2 className={cn(
@@ -204,21 +215,21 @@ const CVPreview = React.forwardRef(({ data }, ref) => {
               <span className="flex-1 pb-1 border-b-2 border-slate-100">SKILLS</span>
             </h2>
             <div className="space-y-1.5">
-              {skills.technical.map((skill, index) => (
+              {skills.technical?.map((skill, index) => (
                 <div key={index} className={cn(isProfessional ? "text-[11px]" : "text-[10px]")}>
                   <span className="font-bold text-slate-900">{skill.category}:</span>
                   <span className="text-gray-700 ml-1">{skill.items}</span>
                 </div>
               ))}
               
-              {(skills.soft_skills?.length > 0 || skills.soft?.length > 0) && (
+              {(skills.soft?.length > 0 || skills.soft_skills?.length > 0) && (
                 <div className={cn(isProfessional ? "text-[11px]" : "text-[10px]")}>
                   <span className="font-bold text-slate-900">Soft Skills:</span>
-                  <span className="text-gray-700 ml-1">{(skills.soft_skills || skills.soft)?.join(', ')}</span>
+                  <span className="text-gray-700 ml-1">{(skills.soft || skills.soft_skills)?.join(', ')}</span>
                 </div>
               )}
 
-              {skills.languages.length > 0 && (
+              {skills.languages?.length > 0 && (
                 <div className={cn(
                   isProfessional ? "text-[11px]" : "text-[10px]",
                   "flex gap-4 mt-2",
